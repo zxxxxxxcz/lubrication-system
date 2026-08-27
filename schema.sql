@@ -22,7 +22,7 @@ ON lubrication_records(device_id, created_at DESC);
 INSERT INTO devices(code, name, location) VALUES
 ('SB001','电力测功器','试车一线'),
 ('SB002','辅助支撑','试车一线'),
-('SB003','液压站','试车一线'),
-('SB004','设备4','试车一线'),
-('SB005','设备5','试车一线')
+('SB003','自动润滑站','试车一线'),
+('SB004','液压站','试车一线'),
+('SB005','进、排风机','试车一线')
 ON CONFLICT(code) DO NOTHING;
