@@ -20,7 +20,7 @@ CREATE INDEX IF NOT EXISTS idx_lubrication_records_device_time
 ON lubrication_records(device_id, created_at DESC);
 
 INSERT INTO devices(code, name, location) VALUES
-('SB001','1号空压机','空压机房'),
-('SB002','2号空压机','空压机房'),
-('SB003','液压站','一号生产线')
+('SB001','电力测功器','试车一线'),
+('SB002','辅助支撑','试车一线'),
+('SB003','液压站','试车一线')
 ON CONFLICT(code) DO NOTHING;
