@@ -17,7 +17,7 @@
 
   function fmtAmount(v) {
     if (v === null || v === undefined) return "暂无";
-    return `${Number(v).toFixed(3).replace(/\.?0+$/, "")} ${currentDevice?.oilUnit || "L"}`;
+    return `${Number(v).toFixed(3).replace(/\.?0+$/, "")} ${currentDevice?.oilUnit || "ml"}`;
   }
 
   function escapeHtml(s="") {
