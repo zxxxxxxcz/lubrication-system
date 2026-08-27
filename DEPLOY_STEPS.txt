@@ -1,0 +1,21 @@
+云端部署最短步骤
+================
+
+1. 解压 lubrication_cloud_v1.zip
+2. 把解压后的文件上传到 GitHub 仓库根目录
+3. 登录 Render
+4. New -> Blueprint
+5. 选择该 GitHub 仓库
+6. 确认创建 lubrication-web + lubrication-db
+7. 部署完成后，复制 Render 给出的 https://...onrender.com 地址
+8. 访问：
+   /e/SB001  -> 工人扫码页面
+   /qr/SB001 -> SB001 二维码打印页
+9. 用两部手机测试：
+   手机A提交一条加注记录
+   手机B刷新同一设备页面
+   如果手机B能立刻看到该记录，说明云数据库共享正常
+
+注意：
+- render.yaml 当前用 free 方案，适合演示测试。
+- 正式生产请改为长期数据库方案，并增加登录/权限。

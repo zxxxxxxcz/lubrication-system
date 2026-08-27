@@ -1,0 +1,20 @@
+{
+  "name": "equipment-lubrication-cloud",
+  "version": "1.0.0",
+  "private": true,
+  "description": "设备润滑加注扫码系统 - 公网 HTTPS + PostgreSQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "helmet": "^8.1.0",
+    "pg": "^8.16.3",
+    "qrcode": "^1.5.4"
+  }
+}
