@@ -113,7 +113,9 @@ async function initDb() {
     const seeds = [
   ["SB001", "电力测功器", "试车一线"],
   ["SB002", "辅助支撑", "试车一线"],
-  ["SB003", "液压站", "试车一线"]
+  ["SB003", "液压站", "试车一线"],
+  ["SB004", "设备4", "试车一线"],
+  ["SB005", "设备5", "试车一线"]
 ];
 
 for (const [code, name, location] of seeds) {
