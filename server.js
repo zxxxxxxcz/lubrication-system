@@ -100,18 +100,21 @@ async function initDb() {
     `);
 
     const seeds = [
-      ["SB001", "电力测功器", "试车一线"],
-      ["SB002", "辅助支撑", "试车一线"],
-      ["SB003", "液压站", "试车一线"]
-    ];
-    for (const [code, name, location] of seeds) {
-      await client.query(
-        `INSERT INTO devices(code, name, location)
-         VALUES($1,$2,$3)
-         ON CONFLICT(code) DO NOTHING`,
-        [code, name, location]
-      );
-    }
+  ["SB001", "电力测功器", "试车一线"],
+  ["SB002", "辅助支撑", "试车一线"],
+  ["SB003", "液压站", "试车一线"]
+];
+
+for (const [code, name, location] of seeds) {
+  await client.query(
+    `INSERT INTO devices(code, name, location)
+     VALUES($1,$2,$3)
+     ON CONFLICT(code) DO UPDATE SET
+       name = EXCLUDED.name,
+       location = EXCLUDED.location`,
+    [code, name, location]
+  );
+}
 
     const count = await client.query(
       `SELECT COUNT(*)::int AS n
