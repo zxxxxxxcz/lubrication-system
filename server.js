@@ -80,11 +80,22 @@ async function initDb() {
         code VARCHAR(32) NOT NULL UNIQUE,
         name VARCHAR(120) NOT NULL,
         location VARCHAR(160) NOT NULL DEFAULT '',
-        oil_unit VARCHAR(12) NOT NULL DEFAULT 'L',
+        oil_unit VARCHAR(12) NOT NULL DEFAULT 'ml',
         active BOOLEAN NOT NULL DEFAULT TRUE,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
+
+    await client.query(`
+     ALTER TABLE devices
+     ALTER COLUMN oil_unit SET DEFAULT 'ml';
+    `);
+
+    await client.query(`
+     UPDATE devices
+     SET oil_unit = 'ml'
+     WHERE oil_unit <> 'ml';
+   `);
     await client.query(`
       CREATE TABLE IF NOT EXISTS lubrication_records (
         id BIGSERIAL PRIMARY KEY,
