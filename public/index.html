@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>设备润滑加注</title>
+  <style>
+    :root{--bg:#f5f7fb;--card:#fff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#0f766e;--accent2:#115e59;--soft:#ecfdf5;--danger:#b91c1c;--shadow:0 10px 30px rgba(15,23,42,.08);--radius:18px}
+    *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}body{min-height:100vh}button,input,textarea{font:inherit}
+    .wrap{max-width:720px;margin:0 auto;padding:18px 14px 48px}.hero{background:linear-gradient(145deg,#0f172a,#1e293b);color:#fff;border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-bottom:14px}.hero-row{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}.eyebrow{font-size:13px;opacity:.72;letter-spacing:.08em}h1{font-size:24px;margin:5px 0 2px}.status{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.12);white-space:nowrap}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.hero-item{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:14px}.hero-item .label{font-size:12px;opacity:.7;margin-bottom:5px}.hero-item .value{font-size:16px;font-weight:700}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:14px}.title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.card h2{font-size:18px;margin:0}.sub{font-size:13px;color:var(--muted)}.last{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fafafa}.stat .label{font-size:12px;color:var(--muted);margin-bottom:7px}.stat .value{font-weight:750;font-size:18px}
+    label{display:block;font-weight:650;margin:12px 0 7px}.input-wrap{position:relative}input[type=number],textarea{width:100%;border:1px solid #cbd5e1;border-radius:14px;background:#fff;padding:15px 52px 15px 14px;color:var(--text);outline:none}textarea{padding-right:14px;min-height:82px;resize:vertical}input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(15,118,110,.1)}.unit{position:absolute;right:15px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--muted)}.hint{font-size:12px;color:var(--muted);margin-top:7px}
+    .btn{border:0;border-radius:14px;padding:14px 16px;font-weight:750;cursor:pointer;min-height:48px}.btn-primary{width:100%;background:var(--accent);color:#fff;margin-top:16px}.btn-primary:disabled{opacity:.6}.btn-light{background:#f1f5f9;color:#0f172a}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{padding:10px 12px;min-height:40px;font-size:13px}.history{display:flex;flex-direction:column;gap:9px}.row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}.time{font-weight:650}.note{font-size:12px;color:var(--muted);margin-top:4px}.amount{font-size:18px;font-weight:800;align-self:center}.empty{padding:24px 8px;text-align:center;color:var(--muted);font-size:14px}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#0f172a;color:#fff;padding:12px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:.2s;box-shadow:var(--shadow);z-index:99;max-width:90vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .device-photo{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#f8fafc;aspect-ratio:16/9}.device-photo img{width:100%;height:100%;display:block;object-fit:contain;background:#fff}.device-photo-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--muted);font-size:14px;line-height:1.7;background:linear-gradient(145deg,#f8fafc,#eef2f7)}.device-photo-empty strong{display:block;color:var(--text);font-size:16px;margin-bottom:4px}.device-photo-caption{font-size:12px;color:var(--muted);margin-top:9px}
+    .device-switch{display:flex;gap:8px;overflow:auto;padding-bottom:2px}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;white-space:nowrap;cursor:pointer}.chip.active{background:var(--soft);border-color:#99f6e4;color:#115e59;font-weight:700}.foot{color:var(--muted);font-size:12px;line-height:1.7;padding:4px 4px 0}.ok{color:#86efac}.bad{color:#fca5a5}.errorbox{background:#fff1f2;border:1px solid #fecdd3;color:#9f1239;padding:14px;border-radius:14px;margin-bottom:14px;display:none}
+    @media(max-width:520px){.wrap{padding:12px 10px 36px}.hero{padding:17px}h1{font-size:22px}.card{padding:16px}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <div id="errorBox" class="errorbox"></div>
+  <section class="hero">
+    <div class="hero-row">
+      <div><div class="eyebrow">EQUIPMENT LUBRICATION</div><h1 id="deviceName">加载中…</h1><div style="font-size:14px;opacity:.75" id="deviceLocation"></div></div>
+      <div class="status"><span id="networkDot">●</span> <span id="networkText">检测中</span></div>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-item"><div class="label">设备编号</div><div class="value" id="deviceCode">—</div></div>
+      <div class="hero-item"><div class="label">润滑油单位</div><div class="value" id="oilUnit">L</div></div>
+    </div>
+  </section>
+
+  <section class="card" id="devicePhotoCard">
+    <div class="title-row">
+      <div><h2>设备照片</h2><div class="sub">用于现场快速确认设备</div></div>
+    </div>
+    <div class="device-photo">
+      <img id="devicePhoto" alt="" hidden>
+      <div id="devicePhotoEmpty" class="device-photo-empty">
+        <div><strong>暂无设备照片</strong><span>请将对应设备图片放入 public/images 文件夹</span></div>
+      </div>
+    </div>
+    <div class="device-photo-caption" id="devicePhotoCaption">正在读取设备信息…</div>
+  </section>
+
+  <section class="card">
+    <div class="title-row"><div><h2>上次加注</h2><div class="sub">来自云端数据库的最新记录</div></div></div>
+    <div class="last">
+      <div class="stat"><div class="label">上次加注时间</div><div class="value" id="lastTime">暂无</div></div>
+      <div class="stat"><div class="label">上次加注量</div><div class="value" id="lastAmount">暂无</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="title-row"><div><h2>本次加注</h2><div class="sub">确认后由服务器自动记录时间</div></div></div>
+    <label for="amount">本次加注量</label>
+    <div class="input-wrap"><input id="amount" type="number" inputmode="decimal" min="0.001" step="0.001" placeholder="例如：3.0"><div class="unit" id="inputUnit">L</div></div>
+    <div class="hint">请输入大于 0 的数值。</div>
+    <label for="remark">备注（可选）</label>
+    <textarea id="remark" maxlength="200" placeholder="例如：正常加注 / 发现轻微渗油"></textarea>
+    <button id="saveBtn" class="btn btn-primary">确认加注</button>
+  </section>
+
+  <section class="card">
+    <div class="title-row">
+    <div><h2>加注历史</h2><div class="sub"></div></div>
+      <div class="actions"><button class="btn btn-light" id="refreshBtn">刷新</button><button class="btn btn-light" id="exportBtn">导出 CSV</button></div>
+    </div>
+    <div id="history" class="history"><div class="empty">正在读取…</div></div>
+  </section>
+
+  <section class="card" id="deviceCard">
+    <div class="title-row"><div><h2>设备切换 / 二维码</h2><div class="sub"></div></div></div>
+    <div id="deviceSwitch" class="device-switch"></div>
+    <div class="actions" style="margin-top:14px"><button class="btn btn-light" id="qrBtn">查看/打印本设备二维码</button></div>
+  </section>
+
+
+</main>
+<div id="toast" class="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>
